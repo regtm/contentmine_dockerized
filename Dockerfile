@@ -2,8 +2,8 @@ FROM node:latest
 WORKDIR /install
 
 # update image and install git
-RUN apt-get clean -y && apt-get -y update && apt-get -y upgrade \
-    apt-get -y install wget openjdk-8-jdk
+RUN apt-get clean -y && apt-get -y update && apt-get -y upgrade &&\
+    apt-get -y install apt-utils wget openjdk-17-jdk
 
 # install gepapers from npm repository
 RUN npm install --global getpapers
@@ -16,6 +16,5 @@ RUN dpkg -i norma_0.1.SNAPSHOT_all.deb
 RUN wget --no-check-certificate https://github.com/ContentMine/ami/releases/download/v0.2.24/ami2_0.1.SNAPSHOT_all.deb
 RUN dpkg -i ami2_0.1.SNAPSHOT_all.deb
 
-WORKDIR /ContentMine
-
-VOLUME /ContentMine
+WORKDIR /data
+VOLUME /data
