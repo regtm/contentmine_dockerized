@@ -16,5 +16,15 @@ RUN dpkg -i norma_0.1.SNAPSHOT_all.deb
 RUN wget --no-check-certificate https://github.com/ContentMine/ami/releases/download/v0.2.24/ami2_0.1.SNAPSHOT_all.deb
 RUN dpkg -i ami2_0.1.SNAPSHOT_all.deb
 
-WORKDIR /data
-VOLUME /data
+# create non-root user
+ARG DOCKER_USER=contentmine
+RUN adduser --system --group ${DOCKER_USER}
+
+# create data exchange volume
+ARG DATA_PATH=/data
+RUN mkdir ${DATA_PATH} && chown -R $DOCKER_USER ${DATA_PATH} && chmod a+rw ${DATA_PATH}
+WORKDIR ${DATA_PATH}
+VOLUME ${DATA_PATH}
+
+# drop privileges
+USER ${DOCKER_USER}

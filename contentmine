@@ -1,0 +1,5 @@
+#! /bin/bash
+mkdir -p data
+chmod -R a+rw data
+
+docker run --rm --volume "${PWD}/data":/data --tty --interactive regtm/contentmine "$@"
