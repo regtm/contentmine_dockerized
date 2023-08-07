@@ -20,6 +20,16 @@ The contentmine script can simply be used this way (dont forget to make it execu
 ```bash
 ./contentmine $TOOL $PARAMETERS
 ```
+### Examples
+Fetch papers from PubMed:
+```bash
+./contentmine getpapers --query 'some query' --xml --limit 100 -o ./data
+```
+
+Convert fulltext XML files to "scholarly" html:
+```bash
+./contentmine norma -q ./ -i fulltext.xml -p scholarly.html --transform nlm2html
+```
 
 ## Manual Usage
 Initially the data folder has to be created on the host and made readable for all to avoid permission issues inside the container:
